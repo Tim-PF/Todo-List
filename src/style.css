@@ -1,3 +1,36 @@
-* {
-    color: green;
+body {
+    height: 100vH;
+    margin:0;
+}
+#main {
+    display:flex;
+    flex-direction: column;
+    height: 100vH;
+}
+.navbar {
+ display:flex;
+ justify-content: space-between;
+ background-color: rgb(104, 28, 0);
+ height: 60px;
+ width: 100%;
+}
+.content {
+    display: flex;
+    flex: 1;
+}
+
+.footer {
+background-color: rgb(116, 55, 34);
+height:30px;
+width: 100%;
+}
+
+.right-panel {
+    
+    flex: 4;
+}
+
+.left-panel {
+    background-color: rgb(250, 219, 172);
+    width:350px;
 }
