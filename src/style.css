@@ -1,3 +1,21 @@
+:root.light{
+    --color-bg-1:rgb(104, 28, 0);
+    --color-bg-2:rgb(250, 219, 172);
+    --color-bg-3:rgb(255, 255, 255);
+    --color-bg-4:rgb(116, 55, 34);
+
+}
+
+:root.dark{
+    --color-bg-1:rgb(45,45,48);
+    --color-bg-2:rgb(62,62,66);
+    --color-bg-3:rgb(18,18,18);
+    --color-bg-4:rgb(45,45,48);
+
+
+}
+
+
 body {
     height: 100vH;
     margin:0;
@@ -10,17 +28,18 @@ body {
 .navbar {
  display:flex;
  justify-content: space-between;
- background-color: rgb(104, 28, 0);
+ background-color: var(--color-bg-1);
  height: 60px;
  width: 100%;
 }
 .content {
+    background-color: var(--color-bg-3);
     display: flex;
     flex: 1;
 }
 
 .footer {
-background-color: rgb(116, 55, 34);
+background-color: var(--color-bg-4);
 height:30px;
 width: 100%;
 }
@@ -31,6 +50,19 @@ width: 100%;
 }
 
 .left-panel {
-    background-color: rgb(250, 219, 172);
+    transform: translateX(0);
+    background-color: var(--color-bg-2);
     width:350px;
+    transition: transform 1s;
+}
+
+.left-panel.hidden {
+    top: 0;
+    left: 0;
+    transform: translateX(-350px);
+    transition: transform 1s;
+    position: absolute ;
+    max-height: 0;
+    opacity: 0 ;
+
 }
