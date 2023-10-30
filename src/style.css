@@ -66,3 +66,17 @@ width: 100%;
     opacity: 0 ;
 
 }
+
+
+#projectForm {
+    display:flex;
+}
+#projectForm.hidden {
+    top: 0;
+    left: 0;
+    transform: translateX(-350px);
+    transition: transform 1s;
+    position: absolute ;
+    max-height: 0;
+    opacity: 0 ;
+}
