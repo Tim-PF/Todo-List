@@ -2,7 +2,7 @@ import './style.css';
 import _ from 'lodash';
 import {toggleSideBar} from './sidebar';
 import {toggleTheme} from './theme';
-import {projectButtonClicked} from './new-project'
+import {projectButtonClicked} from './formFunctions'
 
 
 
@@ -29,6 +29,7 @@ projectButtonClicked();
                             <span class="material-icons-round">menu</span>
                 </div>
                 <input type="text" id="fname" name="fname"><br>
+                <button type="submit" >Add</button>
             </form>
             <button id="addProject"><span class="material-icons-round">add_circle_outlined</span>Add Project</button>
           </div>
