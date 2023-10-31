@@ -18,7 +18,6 @@ function newProjectInput() {
 }
 
 function submitForm(event) {
-    console.log("clicked")
     event.preventDefault();
     const fnameInput = document.querySelector('#fname');
     const fnameValue = fnameInput.value;
@@ -27,7 +26,10 @@ function submitForm(event) {
     
 }
 
+function formPopUp() {
+   const formDiv = document.querySelector('.formDiv')
+    formDiv.classList.remove('hidden')
+}
 
 
-
-export {projectButtonClicked}
+export {projectButtonClicked, formPopUp }

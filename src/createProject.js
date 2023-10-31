@@ -1,3 +1,5 @@
+import {loadContent} from './content'
+
 class Project {
     constructor(name) {
         this.name = name;
@@ -30,6 +32,8 @@ function printForm() {
        projectDiv.textContent = project.name;
        projectDiv.classList.add('project-item')
        projectDiv.setAttribute('data-project', projectData);
+
+       projectDiv.addEventListener('click', () => loadContent(projectDiv.textContent))
 
      
        sidebarProjects.appendChild(projectDiv)
