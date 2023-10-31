@@ -1,9 +1,10 @@
 import { formPopUp } from "./formFunctions";
+import { submitFormTask } from "./createTasks";
 
 export function loadContent(name) {
 
 // Right Panel DIV
-console.log("This is working")
+
  const contentPanel = document.querySelector('.right-panel')
  contentPanel.innerHTML = "";
  // Content DIV for content
@@ -47,11 +48,13 @@ formDiv.classList.add('hidden');
 
 // Create the form element
 const form = document.createElement('form');
+form.addEventListener('submit', submitFormTask)
 
 // Create a label and input for the title
 const titleLabel = document.createElement('label');
 titleLabel.textContent = 'Title:';
 const titleInput = document.createElement('input');
+titleInput.id = 'taskInput';
 titleInput.setAttribute('type', 'text');
 titleInput.setAttribute('name', 'title');
 titleInput.setAttribute('placeholder', 'Enter a title');
@@ -60,6 +63,7 @@ titleInput.setAttribute('placeholder', 'Enter a title');
 const optionalTextLabel = document.createElement('label');
 optionalTextLabel.textContent = 'Optional Text:';
 const optionalTextInput = document.createElement('input');
+optionalTextInput.id = 'taskOptionalInput'
 optionalTextInput.setAttribute('type', 'text');
 optionalTextInput.setAttribute('name', 'optionalText');
 optionalTextInput.setAttribute('placeholder', 'Enter optional text');
@@ -68,6 +72,7 @@ optionalTextInput.setAttribute('placeholder', 'Enter optional text');
 const dateLabel = document.createElement('label');
 dateLabel.textContent = 'Date:';
 const dateInput = document.createElement('input');
+dateInput.id = "taskDate"
 dateInput.setAttribute('type', 'date');
 dateInput.setAttribute('name', 'date');
 
