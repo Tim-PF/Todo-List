@@ -8,7 +8,7 @@ projectButton.addEventListener('click', () => {
 })
 }
 
-
+// removes hidden class of Form that creates name for new Project!
 function newProjectInput() {
    const inputForm = document.querySelector('#projectForm')
    inputForm.addEventListener('submit', submitForm)
@@ -17,6 +17,7 @@ function newProjectInput() {
    }
 }
 
+// Gathers name information to name a Project 
 function submitForm(event) {
     event.preventDefault();
     const fnameInput = document.querySelector('#fname');
@@ -26,6 +27,8 @@ function submitForm(event) {
     
 }
 
+
+// removes hidden class to show form
 function formPopUp() {
    const formDiv = document.querySelector('.formDiv')
     formDiv.classList.remove('hidden')
