@@ -2,7 +2,7 @@ import './style.css';
 import _ from 'lodash';
 import {toggleSideBar} from './sidebar';
 import {toggleTheme} from './theme';
-import {projectButtonClicked} from './formFunctions'
+import {projectButtonClicked, cancelProject} from './formFunctions'
 
 
 
@@ -41,5 +41,9 @@ projectButtonClicked();
 
       <div class="footer"></div>
     `;
+   const  cancelButton = document.querySelector('.projectCancelButton')
+    cancelButton.addEventListener('click', () => {
+        cancelProject();
+    })
   }
   
