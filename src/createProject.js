@@ -10,6 +10,7 @@ class Project {
 const projectList = [];
 // Creates a new Project to store tasks in and prints them to sidebar
  function createProject(prName) {
+    
   let projectName = new Project(prName) ;
   projectList.push(projectName);
   printForm()
@@ -32,14 +33,17 @@ function printForm() {
 
        // Need to insert before the formDiv
        const formDiv = document.querySelector('#projectForm')
+
+     
        
        projectDiv.textContent = project.name;
+       let projectName = projectDiv.textContent
        projectDiv.classList.add('project-item')
        projectDiv.setAttribute('data-project', projectData);
 
 
        projectDiv.addEventListener('click', () => {selectProject(projectDiv),
-        loadContent(projectDiv.textContent)
+        loadContent(projectName)
        })
        
         
@@ -102,6 +106,9 @@ function deleteCurrentProjects(sidebarProjects) {
     const existingProjectItems = sidebarProjects.querySelectorAll('.project-item');
     existingProjectItems.forEach(item => item.remove());
 }
+
+
+
 
 
 export {createProject, projectList}
