@@ -1,4 +1,4 @@
-import { formPopUp } from "./formFunctions";
+import { formPopUp, cancelTask } from "./formFunctions";
 import { submitFormTask } from "./createTasks";
 import { projectList } from "./createProject";
 import { findSelectedProject } from "./createTasks";
@@ -6,7 +6,7 @@ import { findSelectedProject } from "./createTasks";
 export function loadContent(name) {
 
 // Right Panel DIV
-
+ console.log(name)
  const contentPanel = document.querySelector('.right-panel')
  contentPanel.innerHTML = "";
  // Content DIV for content
@@ -94,6 +94,13 @@ const submitButton = document.createElement('button');
 submitButton.setAttribute('type', 'submit');
 submitButton.textContent = 'Submit';
 
+const cancelButton = document.createElement('button');
+cancelButton.setAttribute('type', 'button');
+cancelButton.textContent = 'Cancel';
+cancelButton.addEventListener('click', () => {
+    cancelTask()
+})
+
 // Append the form elements to the form
 form.appendChild(titleLabel);
 form.appendChild(titleInput);
@@ -102,6 +109,7 @@ form.appendChild(optionalTextInput);
 form.appendChild(dateLabel);
 form.appendChild(dateInput);
 form.appendChild(submitButton);
+form.appendChild(cancelButton);
 
 
 formDiv.appendChild(form);
