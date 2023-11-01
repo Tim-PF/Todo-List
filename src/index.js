@@ -24,6 +24,14 @@ projectButtonClicked();
           <h1>Home</h1>
           <div class="Projects">
             <h1>Projects</h1>
+            <form id="editForm" class="hidden">
+                <div class="projectIcon">
+                            <span class="material-icons-round">menu</span>
+                </div>
+                <input type="text" id="editname" name="editname"><br>
+                <button type="submit" class="projectEditSubmitButton">Rename</button>
+                <button type="button" class="projectEditCancelButton">Cancel</button>
+            </form>
             <form id="projectForm" class="hidden">
                 <div class="projectIcon">
                             <span class="material-icons-round">menu</span>
@@ -32,6 +40,7 @@ projectButtonClicked();
                 <button type="submit" class="projectSubmitButton">Add</button>
                 <button type="button" class="projectCancelButton">Cancel</button>
             </form>
+        
             <button id="addProject"><span class="material-icons-round">add_circle_outlined</span>Add Project</button>
             
           </div>

@@ -41,7 +41,12 @@ function createNewTask(title,description,date) {
 //Finds Selected Project by looking for class= selected
 function findSelectedProject() {
     const selectedProject = document.querySelector('.selected');
-    return selectedProject.getAttribute('data-project')
+    if (selectedProject === null) {
+        return
+    }
+    else {
+     return selectedProject.getAttribute('data-project')
+    }
 
 }
 

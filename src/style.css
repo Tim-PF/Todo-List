@@ -81,6 +81,33 @@ width: 100%;
     opacity: 0 ;
 }
 
+#editForm {
+    display:flex;
+}
+#editForm.hidden {
+    top: 0;
+    left: 0;
+    transform: translateX(-350px);
+    transition: transform 1s;
+    position: absolute ;
+    max-height: 0;
+    opacity: 0 ;
+}
+
+.project-item {
+
+}
+
+.project-item.hidden {
+    top: 0;
+    left: 0;
+    transform: translateX(-350px);
+    transition: transform 1s;
+    position: absolute ;
+    max-height: 0;
+    opacity: 0 ;
+}
+
 
 .formDiv.hidden {
     top: 0;
