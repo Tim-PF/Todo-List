@@ -34,8 +34,11 @@ function printForm() {
        projectDiv.classList.add('project-item')
        projectDiv.setAttribute('data-project', projectData);
 
-       projectDiv.addEventListener('click', () => {loadContent(projectDiv.textContent),
-       selectProject(projectDiv)})
+    
+
+       projectDiv.addEventListener('click', () => {selectProject(projectDiv),
+        loadContent(projectDiv.textContent)
+       })
 
      
        sidebarProjects.appendChild(projectDiv)
@@ -47,12 +50,15 @@ function printForm() {
 
 // Gives clicked Project the selected class for better Identification
 function selectProject(currentProject) {
+    
     let projectDivs = document.querySelectorAll('.project-item')
     projectDivs.forEach(project => {
        if (project.classList.contains('selected')) {
+        
         project.classList.remove('selected')
        }
      currentProject.classList.add('selected')
+    
     })
     
 
