@@ -118,7 +118,7 @@ pushTasksToContent(name)
 }
 
 
-
+// Basic Function to print todos in a list inside content
 function pushTasksToContent() {
    const index = findSelectedProject()
    const currentProjectArray = projectList[index].todos;
@@ -143,3 +143,6 @@ function pushTasksToContent() {
        allTodos.appendChild(tasks)
     }
 }
+
+
+
