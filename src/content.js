@@ -1,5 +1,7 @@
 import { formPopUp } from "./formFunctions";
 import { submitFormTask } from "./createTasks";
+import { projectList } from "./createProject";
+import { findSelectedProject } from "./createTasks";
 
 export function loadContent(name) {
 
@@ -18,6 +20,16 @@ const titleBox = document.createElement('div');
 titleBox.textContent = name;
 titleDiv.appendChild(titleBox)
 contentPanel.appendChild(titleDiv)
+
+
+
+//Empty Ul to put Project Tasks into
+const list = document.createElement('ul')
+list.classList.add('taskList')
+contentDiv.appendChild(list)
+
+
+
 
 // Create the button element
 const button = document.createElement('button');
@@ -48,6 +60,7 @@ formDiv.classList.add('hidden');
 
 // Create the form element
 const form = document.createElement('form');
+form.id = 'taskForm'
 form.addEventListener('submit', submitFormTask)
 
 // Create a label and input for the title
@@ -99,5 +112,34 @@ formDiv.appendChild(form);
 contentDiv.appendChild(formDiv)
 contentPanel.appendChild(contentDiv);
 
+pushTasksToContent(name)
 
+
+}
+
+
+
+function pushTasksToContent() {
+   const index = findSelectedProject()
+   const currentProjectArray = projectList[index].todos;
+    for ( let task of currentProjectArray) {
+
+        //li
+    let   tasks = document.createElement('li')
+       
+       //Checkbox
+   let checkBoxDiv = document.createElement('div')
+       checkBoxDiv.textContent = "DummyText"
+       tasks.appendChild(checkBoxDiv)
+
+
+       //Task Title Div
+     let  titleDiv = document.createElement('div')
+       titleDiv.textContent = task.title;
+       tasks.appendChild(titleDiv)
+       
+       //Append Li to UL
+    let   allTodos = document.querySelector('.taskList')
+       allTodos.appendChild(tasks)
+    }
 }
