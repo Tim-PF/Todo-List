@@ -15,6 +15,8 @@ function newProjectInput() {
     inputForm.classList.remove('hidden')
    }
    inputForm.addEventListener('submit', submitForm)
+
+
 }
 
 // Gathers name information to name a Project 
@@ -38,4 +40,20 @@ function formPopUp() {
 }
 
 
-export {projectButtonClicked, formPopUp }
+// Cancel Button for Project Form
+function cancelProject() {
+    const form = document.querySelector('#projectForm');
+    form.reset()
+    form.classList.add('hidden')
+
+}
+
+//Cancel Button for Input Form
+function cancelTask() {
+    const form = document.querySelector('#taskForm');
+    const formDiv = document.querySelector('.formDiv')
+    formDiv.classList.add('hidden')
+    form.reset()
+    
+}
+export {projectButtonClicked, formPopUp, cancelProject, cancelTask}
