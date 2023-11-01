@@ -1,4 +1,5 @@
 import { projectList } from "./createProject";
+import { loadContent } from "./content";
 
 class Tasks {
     constructor(title,description,date) {
@@ -13,6 +14,7 @@ class Tasks {
 // Gathers all Informations from Input Task Form and creates a new Task in process
 function submitFormTask(event) {
    event.preventDefault();
+   const form = document.querySelector('#taskForm')
    const titleTask = document.querySelector('#taskInput');
    const optionalDescription = document.querySelector('#taskOptionalInput');
    const taskDate = document.querySelector('#taskDate');
@@ -23,6 +25,9 @@ function submitFormTask(event) {
    
    createNewTask(title,description,date);
    
+   form.reset();
+
+   reloadContent();
 }
 
 // Finds index of Selected Project and saves the created Task inside of the todos Array of called Project
@@ -39,4 +44,11 @@ function findSelectedProject() {
     return selectedProject.getAttribute('data-project')
 
 }
-export {submitFormTask}
+
+// Finds Project index in ProjectList and than laods name into loadContent
+function reloadContent() {
+    const project = findSelectedProject();
+    loadContent(projectList[project].name)
+
+}
+export {submitFormTask, findSelectedProject}
