@@ -29,19 +29,53 @@ function printForm() {
     
 
        let  projectDiv = document.createElement('div')
+
+       // Need to insert before the formDiv
+       const formDiv = document.querySelector('#projectForm')
        
        projectDiv.textContent = project.name;
        projectDiv.classList.add('project-item')
        projectDiv.setAttribute('data-project', projectData);
 
-    
 
        projectDiv.addEventListener('click', () => {selectProject(projectDiv),
         loadContent(projectDiv.textContent)
        })
+       
+        
+       // Edit And Delete Div
+       const buttonDiv= document.createElement('div')
+       buttonDiv.classList.add('formActionButtons')
+
+       //Edit Button
+       const editDiv = document.createElement('div');
+       editDiv.classList.add('editDiv')
+
+       const editIconSpan = document.createElement('span');
+       editIconSpan.classList.add('material-icons-round');
+       editIconSpan.textContent = 'edit';
+       editDiv.appendChild(editIconSpan)
+       buttonDiv.appendChild(editDiv)
+
+       
+
+       //Delete Button
+       const deleteDiv = document.createElement('div')
+       deleteDiv.classList.add('deleteDiv');
+
+       const deleteIconSpan = document.createElement('span');
+       deleteIconSpan.classList.add('material-icons-round');
+       deleteIconSpan.textContent = 'delete';
+       deleteDiv.appendChild(deleteIconSpan);
+       buttonDiv.appendChild(deleteDiv)
+
+
+       // Append Buttons to projectDiv
+       projectDiv.appendChild(buttonDiv)
+            
 
      
-       sidebarProjects.appendChild(projectDiv)
+       sidebarProjects.insertBefore(projectDiv, formDiv);
 
        projectData++;
 
