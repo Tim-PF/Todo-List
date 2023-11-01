@@ -29,9 +29,11 @@ projectButtonClicked();
                             <span class="material-icons-round">menu</span>
                 </div>
                 <input type="text" id="fname" name="fname"><br>
-                <button type="submit" >Add</button>
+                <button type="submit" class="projectSubmitButton">Add</button>
+                <button type="button" class="projectCancelButton">Cancel</button>
             </form>
             <button id="addProject"><span class="material-icons-round">add_circle_outlined</span>Add Project</button>
+            
           </div>
         </div>
         <div class="right-panel"></div>
