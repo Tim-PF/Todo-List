@@ -3,6 +3,7 @@ import _ from 'lodash';
 import {toggleSideBar} from './sidebar';
 import {toggleTheme} from './theme';
 import {projectButtonClicked, cancelProject} from './formFunctions'
+import { printForm } from './createProject';
 
 
 
@@ -10,6 +11,8 @@ home();
 toggleSideBar();
 toggleTheme();
 projectButtonClicked();
+printForm();
+
 
   function home() {
     const home = document.querySelector('#main');

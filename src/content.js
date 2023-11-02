@@ -1,12 +1,13 @@
-import { formPopUp, cancelTask } from "./formFunctions";
+import { formPopUp, cancelTask , importantButtonClick} from "./formFunctions";
 import { submitFormTask } from "./createTasks";
-import { projectList } from "./createProject";
+import { projectList, saveToLocalStorage } from "./createProject";
 import { findSelectedProject } from "./createTasks";
+import { id } from "./createTasks";
 
 export function loadContent(name) {
 
 // Right Panel DIV
- console.log(name)
+ 
  const contentPanel = document.querySelector('.right-panel')
  contentPanel.innerHTML = "";
  // Content DIV for content
@@ -50,8 +51,7 @@ const text = document.createTextNode('Add Task');
 button.appendChild(span);
 button.appendChild(text);
 
-// Append the button to a container or the document body
-contentDiv.appendChild(button)
+
 
 // Create Form Element DIV
 const formDiv = document.createElement('div')
@@ -118,6 +118,9 @@ formDiv.appendChild(form);
 
 
 contentDiv.appendChild(formDiv)
+
+// Append the button to a container or the document body
+contentDiv.appendChild(button)
 contentPanel.appendChild(contentDiv);
 
 pushTasksToContent(name)
@@ -132,8 +135,11 @@ function pushTasksToContent() {
    const currentProjectArray = projectList[index].todos;
     for ( let task of currentProjectArray) {
 
+        
+
         //li
     let   tasks = document.createElement('li')
+    tasks.id = task.id
        
        //Checkbox
    let checkBoxDiv = document.createElement('div')
@@ -168,7 +174,10 @@ function pushTasksToContent() {
        // Important Button
        let importantButton = document.createElement('span')
        importantButton.classList.add('material-icons-round', 'star-outline')
-       importantButton.textContent = "star_outline"
+       importantButton.textContent = "star"
+       importantButton.addEventListener('click', () => {
+        importantButtonClick(importantButton);
+       })
 
        // Edit Button
        let editButton = document.createElement('span')
@@ -192,7 +201,8 @@ function pushTasksToContent() {
        tasks.appendChild(dateDiv);
        tasks.appendChild(taskRightSideDiv);
 
-
+      // Functions to check if checked or important 
+      checkImportant(task, importantButton);
 
        //Append Li to UL
     let   allTodos = document.querySelector('.taskList')
@@ -203,4 +213,15 @@ function pushTasksToContent() {
 
 
 
+// Checks if important and adds class important
 
+function checkImportant(task, importantButton) {
+ if (task.important) {
+    // Add the "important" class
+    importantButton.classList.add('important');
+ }
+ else {
+    // Remove the "important" class
+    importantButton.classList.remove('important');
+}
+}

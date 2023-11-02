@@ -1,4 +1,5 @@
-import {createProject} from './createProject'
+import {createProject, projectList, saveToLocalStorage} from './createProject'
+import { findSelectedProject } from './createTasks';
 function projectButtonClicked() {
 const projectButton = document.querySelector('#addProject')
 
@@ -59,5 +60,32 @@ function cancelTask() {
 
 
 
+// Important Button (star) when clicked
 
-export {projectButtonClicked, formPopUp, cancelProject, cancelTask}
+function importantButtonClick(importantButton) {
+  let  index = findSelectedProject(importantButton)
+ let project = projectList[index].todos
+// Finds Id of closest List item and with that the index to change important to true or false
+ let closestListItem = importantButton.closest('li');
+ let idValue = closestListItem.getAttribute('id')
+
+// After this line, project[idValue].important will be toggled (true if it was false, false if it was true)
+project[idValue].important = !project[idValue].important;
+
+if (project[idValue].important) {
+    // Add the "important" class
+    importantButton.classList.add('important');
+} else {
+    // Remove the "important" class
+    importantButton.classList.remove('important');
+}
+
+ saveToLocalStorage()
+
+
+
+
+}
+
+
+export {projectButtonClicked, formPopUp, cancelProject, cancelTask, importantButtonClick}

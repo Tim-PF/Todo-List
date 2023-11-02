@@ -1,5 +1,5 @@
 import {loadContent} from './content'
-import { findSelectedProject } from './createTasks';
+import { findSelectedProject, id } from './createTasks';
 
 class Project {
     constructor(name) {
@@ -8,12 +8,17 @@ class Project {
     }
 }
 // Array of all Projects
-const projectList = [];
+let defaultProjectList=[];
+let projectList = localStorage.getItem("myProjectList");
+    projectList = JSON.parse(projectList || JSON.stringify(defaultProjectList));
+
 // Creates a new Project to store tasks in and prints them to sidebar
  function createProject(prName) {
     
   let projectName = new Project(prName) ;
   projectList.push(projectName);
+
+  saveToLocalStorage()
   printForm()
 }
 
@@ -118,9 +123,9 @@ function printForm() {
 
 // Gives clicked Project the selected class for better Identification
 function selectProject(currentProject) {
-    console.log(currentProject)
+    
     let projectDivs = document.querySelectorAll('.project-item')
-    console.log(projectDivs)
+    
   //  if (projectDivs.length == 0) {
       //let  projectDiv = document.querySelector('.project-item')
         //   projectDiv.classList.add('selected')
@@ -150,6 +155,7 @@ selectProject(projectItem);
  let index = findSelectedProject();
  if (index >= 0 && index < projectList.length) {
     projectList.splice(index, 1); // Removes one element at the specified index
+    saveToLocalStorage()
     printForm()
     
     const contentPanel = document.querySelector('.right-panel')
@@ -193,7 +199,7 @@ function editFormTask(event) {
    
     projectList[index].name = editName.value
     editForm.classList.add('hidden')
-    
+    saveToLocalStorage()
     printForm()
 }
 
@@ -216,4 +222,12 @@ function moveEditForm (editDiv) {
  projectItem.insertAdjacentElement('afterend', existingForm);
 
 }
-export {createProject, projectList}
+
+
+function saveToLocalStorage(){
+    localStorage.setItem("myProjectList", JSON.stringify(projectList));
+    localStorage.setItem("currentId", (id).toString());
+
+    
+}
+export {createProject, projectList, printForm, saveToLocalStorage}

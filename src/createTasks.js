@@ -1,12 +1,15 @@
 import { projectList } from "./createProject";
 import { loadContent } from "./content";
+import { saveToLocalStorage } from "./createProject";
 
 class Tasks {
-    constructor(title,description,date) {
+    constructor(id,title,description,date) {
+        this.id = id;
         this.title = title;
         this.description = description;
         this.date = date;
-        this.priority = false;
+        this.important = false;
+        this.completed = false;
     }
 
 }
@@ -22,20 +25,31 @@ function submitFormTask(event) {
    const title = titleTask.value;
    const description = optionalDescription.value;
    const date = taskDate.value;
+
    
-   createNewTask(title,description,date);
+   
+   createNewTask(defaultId,title,description,date);
    
    form.reset();
 
    reloadContent();
 }
 
+// defaultID for now ! Add more after localStorage
+let defaultId = 0
+// Id or defaultID if not found
+let id = Number(localStorage.getItem("currentId")) || defaultId;
+
 // Finds index of Selected Project and saves the created Task inside of the todos Array of called Project
-function createNewTask(title,description,date) {
- const task = new Tasks(title, description, date);
+function createNewTask(defaultId,title,description,date) {
+ let newId = id;
+ const task = new Tasks(newId, title, description, date);
  let index = findSelectedProject();
  projectList[index].todos.push(task)
 
+ 
+ id++
+ saveToLocalStorage()
 }
 
 //Finds Selected Project by looking for class= selected
@@ -56,4 +70,4 @@ function reloadContent() {
     loadContent(projectList[project].name)
 
 }
-export {submitFormTask, findSelectedProject}
+export {submitFormTask, findSelectedProject, id}

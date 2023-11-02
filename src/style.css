@@ -171,3 +171,7 @@ li {
 .checked {
 
 }
+
+.important {
+    color: gold;
+}
