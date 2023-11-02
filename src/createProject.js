@@ -43,7 +43,7 @@ function printForm() {
        projectDiv.setAttribute('data-project', projectData);
 
        
-       selectProject(projectDiv);
+
        projectDiv.addEventListener('click', () => {selectProject(projectDiv),
         loadContent(projectName)
        })
@@ -108,6 +108,8 @@ function printForm() {
      
        sidebarProjects.insertBefore(projectDiv, formDiv);
 
+       selectProject(projectDiv);
+
 
        projectData++;
 
@@ -116,8 +118,13 @@ function printForm() {
 
 // Gives clicked Project the selected class for better Identification
 function selectProject(currentProject) {
-    
+    console.log(currentProject)
     let projectDivs = document.querySelectorAll('.project-item')
+    console.log(projectDivs)
+  //  if (projectDivs.length == 0) {
+      //let  projectDiv = document.querySelector('.project-item')
+        //   projectDiv.classList.add('selected')
+    //}
     projectDivs.forEach(project => {
         
        if (project.classList.contains('selected')) {

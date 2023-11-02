@@ -12,7 +12,7 @@ export function loadContent(name) {
  // Content DIV for content
  const contentDiv = document.createElement('div');
  
- contentDiv.classList.add('content');
+ contentDiv.classList.add('list-todos');
 
  // Div with Project name inside
 const titleDiv = document.createElement ('div');
@@ -137,15 +137,63 @@ function pushTasksToContent() {
        
        //Checkbox
    let checkBoxDiv = document.createElement('div')
-       checkBoxDiv.textContent = "DummyText"
-       tasks.appendChild(checkBoxDiv)
+       checkBoxDiv.classList.add('unchecked')
+       checkBoxDiv.addEventListener('click', () => {
+        checkBoxDiv.classList.toggle('checked')
+       })
+
+    // Div with Title and Description 
+    let listInfos = document.createElement('div')
 
 
        //Task Title Div
      let  titleDiv = document.createElement('div')
        titleDiv.textContent = task.title;
-       tasks.appendChild(titleDiv)
+       listInfos.appendChild(titleDiv)
+
+       // Description Div
+
+       let descriptionDiv = document.createElement('div')
+       descriptionDiv.textContent = task.description;
+       listInfos.appendChild(descriptionDiv)
+
+
+       // Date Div
+       let dateDiv = document.createElement('div');
+       dateDiv.textContent = task.date;
+
+       // Right Side Div for Buttons Important Edit and Delete Button
+       let taskRightSideDiv = document.createElement('div')
+
+       // Important Button
+       let importantButton = document.createElement('span')
+       importantButton.classList.add('material-icons-round', 'star-outline')
+       importantButton.textContent = "star_outline"
+
+       // Edit Button
+       let editButton = document.createElement('span')
+       editButton.classList.add('material-icons-round')
+       editButton.textContent = "mode_edit_outline"
+
+      // Delete Button
+      let deleteButton = document.createElement('span')
+      deleteButton.classList.add('material-icons-round')
+      deleteButton.textContent = "delete_outline"
+       //Append Button to Right Side Div 
+
+       taskRightSideDiv.appendChild(importantButton);
+       taskRightSideDiv.appendChild(editButton);
+       taskRightSideDiv.appendChild(deleteButton);
        
+
+       //Append to Li
+       tasks.appendChild(checkBoxDiv);
+       tasks.appendChild(listInfos);
+       tasks.appendChild(dateDiv);
+       tasks.appendChild(taskRightSideDiv);
+
+
+
        //Append Li to UL
     let   allTodos = document.querySelector('.taskList')
        allTodos.appendChild(tasks)

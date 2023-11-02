@@ -118,3 +118,56 @@ width: 100%;
     transition: max-height 1s ease-out ;
     opacity: 0;
 }
+
+.list-todos {
+    display:flex;
+    height:100%;
+    flex-direction: column;
+}
+
+ul {
+    padding: 0px;
+    margin: 0px;
+
+   
+}
+
+li {
+    list-style: none;
+    display:flex;
+    border: 1px solid black;
+    padding: 0px;
+    margin: 0px;
+    
+
+}
+
+#addTask {
+  width:  120px;
+}
+
+
+.unchecked{
+    width: 13px;
+    height: 13px;
+    border: solid 2px black ;
+    border-radius: 50%;
+    margin-right:8px;
+    margin-top:10px;
+    flex-shrink: 0;
+}
+
+
+.unchecked.important{
+    width: 13px;
+    height: 13px;
+    border: solid 2px black ;
+    border-radius: 50%;
+    margin-right:8px;
+    margin-top:10px;
+    flex-shrink: 0;
+    border-color: goldenrod;
+}
+.checked {
+
+}
