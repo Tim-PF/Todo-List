@@ -119,6 +119,16 @@ width: 100%;
     opacity: 0;
 }
 
+.editTaskDiv.hidden {
+    top: 0;
+    left: 0;
+    pointer-events: none ;
+    position: absolute ;
+    max-height: 0 ;
+    transition: max-height 1s ease-out ;
+    opacity: 0;
+}
+
 .list-todos {
     display:flex;
     height:100%;
@@ -181,5 +191,18 @@ li {
 /* hideList makes star invisible */
 .hideList {
     opacity: 0;
+    top: 10px; 
+    left: 10px;
     position: absolute;
+}
+
+
+   .hidden {
+    top: 0;
+    left: 0;
+    pointer-events: none ;
+    position: absolute ;
+    max-height: 0 ;
+    transition: max-height 1s ease-out ;
+    opacity: 0;
 }

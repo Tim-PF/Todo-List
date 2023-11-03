@@ -1,7 +1,7 @@
 import { projectList } from "./createProject";
 import { loadContent } from "./content";
 import { saveToLocalStorage } from "./createProject";
-
+import { hiddenIdValue } from "./content";
 class Tasks {
     constructor(id,title,description,date) {
         this.id = id;
@@ -34,6 +34,27 @@ function submitFormTask(event) {
 
    reloadContent();
 }
+
+function editFormTask(event) {
+    event.preventDefault();
+    
+    const form = document.querySelector('#editTaskForm')
+    const titleTask = document.querySelector('#editTaskInput');
+    const optionalDescription = document.querySelector('#editTaskOptionalInput');
+    const taskDate = document.querySelector('#editTaskDate');
+ 
+    const title = titleTask.value;
+    const description = optionalDescription.value;
+    const date = taskDate.value;
+ 
+    
+    
+   editTask(defaultId,title,description,date);
+    
+    form.reset();
+ 
+    reloadContent();
+ }
 
 // defaultID for now ! Add more after localStorage
 let defaultId = 0
@@ -70,4 +91,34 @@ function reloadContent() {
     loadContent(projectList[project].name)
 
 }
-export {submitFormTask, findSelectedProject, id}
+
+
+
+function editTask(defaultId,title,description,date) {
+    let  index = findSelectedProject()
+    let project = projectList[index].todos
+   // Finds Id of closest List item and with that the index to change important to true or false
+   
+    let idValue = hiddenIdValue
+   
+    // For loop to look for real Id in case one task gets deleted its important
+    
+    let realtask;
+    
+   for (let task of project) {
+     
+    if (task.id == idValue) {
+      realtask = task
+
+   
+   
+    }
+   }
+
+   realtask.title = title;
+   realtask.description = description;
+   realtask.date = date;
+
+   saveToLocalStorage()
+}
+export {submitFormTask, findSelectedProject, id, editFormTask}

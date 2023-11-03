@@ -1,9 +1,11 @@
-import { formPopUp, cancelTask , importantButtonClick} from "./formFunctions";
+import { formPopUp, cancelTask , importantButtonClick, deleteButtonClicked, showHiddenForm, editCancelTask,moveTaskEditForm } from "./formFunctions";
 import { submitFormTask } from "./createTasks";
 import { projectList, saveToLocalStorage } from "./createProject";
-import { findSelectedProject } from "./createTasks";
+import { findSelectedProject, editFormTask } from "./createTasks";
 import { id } from "./createTasks";
 
+//Important for editing Tasks !
+export let hiddenIdValue = null;
 export function loadContent(name) {
 
 // Right Panel DIV
@@ -51,7 +53,68 @@ const text = document.createTextNode('Add Task');
 button.appendChild(span);
 button.appendChild(text);
 
+// Create Edit Element DIV
 
+const editTaskDiv = document.createElement('div')
+editTaskDiv.classList.add('editTaskDiv');
+editTaskDiv.classList.add('hidden');
+
+// Create the form element
+const editTaskForm = document.createElement('form');
+editTaskForm.id = 'editTaskForm'
+editTaskDiv.addEventListener('submit', editFormTask)    // Changes needed !!!
+
+// Create a label and input for the title
+const editTitleLabel = document.createElement('label');
+editTitleLabel.textContent = 'Title:';
+const editTitleInput = document.createElement('input');
+editTitleInput.id = 'editTaskInput';                       // ID of edit title
+editTitleInput.setAttribute('type', 'text');
+editTitleInput.setAttribute('name', 'title');
+editTitleInput.setAttribute('placeholder', 'Enter a title');
+
+// Create a label and input for the optional text box
+const editOptionalTextLabel = document.createElement('label');
+editOptionalTextLabel.textContent = 'Optional Text:';
+const editOptionalTextInput = document.createElement('input');
+editOptionalTextInput.id = 'editTaskOptionalInput'          // ID of edit optional Input
+editOptionalTextInput.setAttribute('type', 'text');
+editOptionalTextInput.setAttribute('name', 'optionalText');
+editOptionalTextInput.setAttribute('placeholder', 'Enter optional text');
+
+// Create a label and input for the date
+const editDateLabel = document.createElement('label');
+editDateLabel.textContent = 'Date:';
+const editDateInput = document.createElement('input');
+editDateInput.id = "editTaskDate"                               // ID of edit Date
+editDateInput.setAttribute('type', 'date');
+editDateInput.setAttribute('name', 'date');
+
+// Create a submit button
+const editSubmitButton = document.createElement('button');
+editSubmitButton .setAttribute('type', 'submit');
+editSubmitButton .textContent = 'Submit';
+
+const editCancelButton = document.createElement('button');
+editCancelButton.setAttribute('type', 'button');
+editCancelButton.textContent = 'Cancel';
+editCancelButton.addEventListener('click', () => {
+    editCancelTask()
+})
+// Append the form elements to the form
+editTaskForm.appendChild(editTitleLabel);
+editTaskForm.appendChild(editTitleInput);
+editTaskForm.appendChild(editOptionalTextLabel);
+editTaskForm.appendChild(editOptionalTextInput);
+editTaskForm.appendChild(editDateLabel);
+editTaskForm.appendChild(editDateInput);
+editTaskForm.appendChild(editSubmitButton);
+editTaskForm.appendChild(editCancelButton);
+
+
+editTaskDiv.appendChild(editTaskForm);
+
+contentDiv.appendChild(editTaskDiv)
 
 // Create Form Element DIV
 const formDiv = document.createElement('div')
@@ -130,12 +193,11 @@ pushTasksToContent(name)
 
 
 // Basic Function to print todos in a list inside content
-function pushTasksToContent() {
+export function pushTasksToContent() {
+
    const index = findSelectedProject()
    const currentProjectArray = projectList[index].todos;
     for ( let task of currentProjectArray) {
-
-        
 
         //li
     let   tasks = document.createElement('li')
@@ -191,11 +253,21 @@ function pushTasksToContent() {
        let editButton = document.createElement('span')
        editButton.classList.add('material-icons-round')
        editButton.textContent = "mode_edit_outline"
+       editButton.addEventListener('click', (event) => {
+        
+        hiddenIdValue = hiddenId(editButton);
+        // Now you can use the idValue variable here or pass it to other functions
+        showHiddenForm();
+        moveTaskEditForm()
+    });
 
       // Delete Button
       let deleteButton = document.createElement('span')
       deleteButton.classList.add('material-icons-round')
       deleteButton.textContent = "delete_outline"
+      deleteButton.addEventListener('click',() => {
+        deleteButtonClicked(deleteButton)
+      })
        //Append Button to Right Side Div 
 
        taskRightSideDiv.appendChild(importantButton);
@@ -237,3 +309,14 @@ function checkImportant(task, importantButton, importantButtonTrue) {
     importantButtonTrue.classList.add('hideList'); 
 }
 }
+
+function hiddenId(editButton) {
+    const closestListItem = editButton.closest('li');
+    if (closestListItem) {
+        // Get the value of the 'data-some-attribute' attribute from the closest <li> element
+        const idValue = closestListItem.getAttribute('id');
+        console.log(idValue)
+        return idValue
+}
+}
+

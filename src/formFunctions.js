@@ -1,6 +1,6 @@
 import {createProject, projectList, saveToLocalStorage} from './createProject'
 import { findSelectedProject } from './createTasks';
-import { pushTasksToContent } from './content';
+import { pushTasksToContent, loadContent, hiddenIdValue } from './content';
 function projectButtonClicked() {
 const projectButton = document.querySelector('#addProject')
 
@@ -41,6 +41,12 @@ function formPopUp() {
     formDiv.classList.remove('hidden')
 }
 
+function showHiddenForm() {
+    console.log("hi clicked")
+    const formDiv = document.querySelector('.editTaskDiv')
+    formDiv.classList.remove('hidden')
+}
+
 
 // Cancel Button for Project Form
 function cancelProject() {
@@ -54,11 +60,34 @@ function cancelProject() {
 function cancelTask() {
     const form = document.querySelector('#taskForm');
     const formDiv = document.querySelector('.formDiv')
+    
     formDiv.classList.add('hidden')
     form.reset()
     
 }
 
+function editCancelTask() {
+    const form = document.querySelector('#editTaskForm');
+    const formDiv = document.querySelector('.editTaskDiv');
+
+    const ulElement = document.querySelector('.taskList');
+    const listItems = ulElement.querySelectorAll('li');
+    let searchListItem = null;
+    
+    listItems.forEach((listItem) => {
+        const idOfListItem = listItem.getAttribute('id');
+        if (idOfListItem === hiddenIdValue) {
+          searchListItem = listItem;
+        }
+      });
+      searchListItem.classList.remove('hidden')
+
+    formDiv.classList.add('hidden')
+
+
+    form.reset()
+    
+}
 
 
 // Important Button (star) when clicked
@@ -79,7 +108,7 @@ for (let task of project) {
  if (task.id == idValue) {
    realtask = task
    realIdValue = task.id
-console.log(realtask)
+
 
  }
 }
@@ -108,14 +137,16 @@ if (realtask.important) {
 
 function deleteButtonClicked(deleteButton) {
     let  index = findSelectedProject(deleteButton)
+  
     let project = projectList[index].todos
+    let projectName = projectList[index].name
    // Finds Id of closest List item and with that the index to change important to true or false
     let closestListItem = deleteButton.closest('li');
     let idValue = closestListItem.getAttribute('id')
    
     // For loop to look for real Id in case one task gets deleted its important
     let realIdValue;
-   
+    
    
    for (let task of project) {
      
@@ -136,8 +167,27 @@ function deleteButtonClicked(deleteButton) {
        projectList[index].todos = project
        // Save the updated project array to local storage
        saveToLocalStorage();
-       pushTasksToContent()
+       loadContent(projectName)
    }
 }
 
-export {projectButtonClicked, formPopUp, cancelProject, cancelTask, importantButtonClick,deleteButtonClicked}
+// Toggle hidden of task and moves Edit Form Task right under the selected class!
+function moveTaskEditForm() {
+    const editTaskDiv = document.querySelector('.editTaskDiv');
+    const ulElement = document.querySelector('.taskList');
+    const listItems = ulElement.querySelectorAll('li');
+    let searchListItem = null;
+  
+    listItems.forEach((listItem) => {
+      const idOfListItem = listItem.getAttribute('id');
+      if (idOfListItem === hiddenIdValue) {
+        searchListItem = listItem;
+      }
+    });
+    searchListItem.classList.add('hidden')
+    if (searchListItem) {
+      searchListItem.insertAdjacentElement('afterend', editTaskDiv);
+    }
+  }
+  
+export {projectButtonClicked, formPopUp, cancelProject, cancelTask, importantButtonClick,deleteButtonClicked, showHiddenForm, editCancelTask,moveTaskEditForm}

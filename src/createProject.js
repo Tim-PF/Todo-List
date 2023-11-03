@@ -78,7 +78,7 @@ function printForm() {
         removeHidden();
         editForm.reset();
         openEditForm(editDiv);
-        
+       
         
        })
 
@@ -197,10 +197,13 @@ function editFormTask(event) {
     let projectItem = editDiv.closest('.project-item');
     projectItem.classList.remove('hidden')
    
+
+    //Gives Access to Selected Project Object
     projectList[index].name = editName.value
     editForm.classList.add('hidden')
     saveToLocalStorage()
     printForm()
+    loadContent(projectList[index].name)
 }
 
 
@@ -225,9 +228,10 @@ function moveEditForm (editDiv) {
 
 
 function saveToLocalStorage(){
+    console.log(projectList)
     localStorage.setItem("myProjectList", JSON.stringify(projectList));
     localStorage.setItem("currentId", (id).toString());
 
-    
+    console.log(projectList)
 }
 export {createProject, projectList, printForm, saveToLocalStorage}
