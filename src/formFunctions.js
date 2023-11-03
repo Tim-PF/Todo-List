@@ -1,5 +1,6 @@
 import {createProject, projectList, saveToLocalStorage} from './createProject'
 import { findSelectedProject } from './createTasks';
+import { pushTasksToContent } from './content';
 function projectButtonClicked() {
 const projectButton = document.querySelector('#addProject')
 
@@ -71,21 +72,24 @@ function importantButtonClick(importantButton, importantButtonTrue) {
 
  // For loop to look for real Id in case one task gets deleted its important
  let realIdValue;
-
-
+ let realtask
+ 
 for (let task of project) {
   
  if (task.id == idValue) {
-
+   realtask = task
    realIdValue = task.id
+console.log(realtask)
 
  }
 }
 
-// After this line, project[realIdValue].important will be toggled (true if it was false, false if it was true)
-project[realIdValue].important = !project[realIdValue].important;
 
-if (project[realIdValue].important) {
+
+// After this line, project[realIdValue].important will be toggled (true if it was false, false if it was true)
+realtask.important = !realtask.important;
+
+if (realtask.important) {
     // Add the "important" class
     importantButton.classList.add('hideList');
     importantButtonTrue.classList.remove('hideList'); 
@@ -102,4 +106,38 @@ if (project[realIdValue].important) {
 }
 
 
-export {projectButtonClicked, formPopUp, cancelProject, cancelTask, importantButtonClick}
+function deleteButtonClicked(deleteButton) {
+    let  index = findSelectedProject(deleteButton)
+    let project = projectList[index].todos
+   // Finds Id of closest List item and with that the index to change important to true or false
+    let closestListItem = deleteButton.closest('li');
+    let idValue = closestListItem.getAttribute('id')
+   
+    // For loop to look for real Id in case one task gets deleted its important
+    let realIdValue;
+   
+   
+   for (let task of project) {
+     
+    if (task.id == idValue) {
+   
+      realIdValue = task.id
+   
+    }
+   }
+   
+   // Task to get removed
+   let taskToRemove = project.find(item => item.id === realIdValue);
+
+   if (taskToRemove) {
+       // Remove the task from the project array
+       console.log(taskToRemove)
+       project = project.filter(item => item !== taskToRemove);
+       projectList[index].todos = project
+       // Save the updated project array to local storage
+       saveToLocalStorage();
+       pushTasksToContent()
+   }
+}
+
+export {projectButtonClicked, formPopUp, cancelProject, cancelTask, importantButtonClick,deleteButtonClicked}
