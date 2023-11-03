@@ -62,7 +62,7 @@ function cancelTask() {
 
 // Important Button (star) when clicked
 
-function importantButtonClick(importantButton) {
+function importantButtonClick(importantButton, importantButtonTrue) {
   let  index = findSelectedProject(importantButton)
  let project = projectList[index].todos
 // Finds Id of closest List item and with that the index to change important to true or false
@@ -74,12 +74,13 @@ project[idValue].important = !project[idValue].important;
 
 if (project[idValue].important) {
     // Add the "important" class
-    importantButton.classList.add('important');
+    importantButton.classList.add('hideList');
+    importantButtonTrue.classList.remove('hideList'); 
 } else {
     // Remove the "important" class
-    importantButton.classList.remove('important');
+    importantButton.classList.remove('hideList');
+    importantButtonTrue.classList.add('hideList'); 
 }
-
  saveToLocalStorage()
 
 

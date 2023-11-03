@@ -172,6 +172,14 @@ li {
 
 }
 
+
+/* Golden Star to Task */
 .important {
     color: gold;
+}
+
+/* hideList makes star invisible */
+.hideList {
+    opacity: 0;
+    position: absolute;
 }
