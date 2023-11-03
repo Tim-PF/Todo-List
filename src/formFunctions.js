@@ -69,10 +69,23 @@ function importantButtonClick(importantButton, importantButtonTrue) {
  let closestListItem = importantButton.closest('li');
  let idValue = closestListItem.getAttribute('id')
 
-// After this line, project[idValue].important will be toggled (true if it was false, false if it was true)
-project[idValue].important = !project[idValue].important;
+ // For loop to look for real Id in case one task gets deleted its important
+ let realIdValue;
 
-if (project[idValue].important) {
+
+for (let task of project) {
+  
+ if (task.id == idValue) {
+
+   realIdValue = task.id
+
+ }
+}
+
+// After this line, project[realIdValue].important will be toggled (true if it was false, false if it was true)
+project[realIdValue].important = !project[realIdValue].important;
+
+if (project[realIdValue].important) {
     // Add the "important" class
     importantButton.classList.add('hideList');
     importantButtonTrue.classList.remove('hideList'); 
