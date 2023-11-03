@@ -174,9 +174,17 @@ function pushTasksToContent() {
        // Important Button
        let importantButton = document.createElement('span')
        importantButton.classList.add('material-icons-round', 'star-outline')
-       importantButton.textContent = "star"
+       importantButton.textContent = "star_outline"
        importantButton.addEventListener('click', () => {
-        importantButtonClick(importantButton);
+        importantButtonClick(importantButton , importantButtonTrue);
+       })
+
+       // Second Important Button Full Star if important
+       let importantButtonTrue = document.createElement('span')
+       importantButtonTrue.classList.add('material-icons-round', 'important','hideList')
+       importantButtonTrue.textContent = "star"
+       importantButtonTrue.addEventListener('click', () => {
+        importantButtonClick(importantButton , importantButtonTrue);
        })
 
        // Edit Button
@@ -191,6 +199,7 @@ function pushTasksToContent() {
        //Append Button to Right Side Div 
 
        taskRightSideDiv.appendChild(importantButton);
+       taskRightSideDiv.appendChild(importantButtonTrue);
        taskRightSideDiv.appendChild(editButton);
        taskRightSideDiv.appendChild(deleteButton);
        
@@ -202,7 +211,7 @@ function pushTasksToContent() {
        tasks.appendChild(taskRightSideDiv);
 
       // Functions to check if checked or important 
-      checkImportant(task, importantButton);
+      checkImportant(task, importantButton, importantButtonTrue);
 
        //Append Li to UL
     let   allTodos = document.querySelector('.taskList')
@@ -215,13 +224,16 @@ function pushTasksToContent() {
 
 // Checks if important and adds class important
 
-function checkImportant(task, importantButton) {
+function checkImportant(task, importantButton, importantButtonTrue) {
+    console.log(importantButton)
  if (task.important) {
     // Add the "important" class
-    importantButton.classList.add('important');
- }
+    importantButton.classList.add('hideList');
+    importantButtonTrue.classList.remove('hideList'); 
+ }  
  else {
     // Remove the "important" class
-    importantButton.classList.remove('important');
+    importantButton.classList.remove('hideList');
+    importantButtonTrue.classList.add('hideList'); 
 }
 }
