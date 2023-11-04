@@ -1,5 +1,6 @@
 import {loadContent} from './content'
 import { findSelectedProject, id } from './createTasks';
+import {allTasks, tasksImportant, tasksToday, tasksNextSevenDays} from './home';
 
 class Project {
     constructor(name) {
@@ -27,6 +28,21 @@ function printForm() {
    let projectData = 0;
 
    const sidebarProjects = document.querySelector('.Projects');
+
+
+// Left Panel DIV Premade Projects (All Tasks, Today, Next7days, Important) adds Event Listener
+const allTasksButton = document.querySelector('#allTasks')
+allTasksButton.addEventListener('click', () => allTasks() )
+
+const importantButton = document.querySelector('#importantTasks');
+importantButton.addEventListener('click', () => tasksImportant())
+
+const todayButton = document.querySelector('#todayTasks')
+todayButton.addEventListener('click', () =>tasksToday() )
+
+const nextSevenDaysButton = document.querySelector('#nextSevenDaysTasks')
+nextSevenDaysButton.addEventListener('click', () => tasksNextSevenDays() )
+
 
    
    deleteCurrentProjects(sidebarProjects)
@@ -228,10 +244,10 @@ function moveEditForm (editDiv) {
 
 
 function saveToLocalStorage(){
-    console.log(projectList)
+    
     localStorage.setItem("myProjectList", JSON.stringify(projectList));
     localStorage.setItem("currentId", (id).toString());
 
-    console.log(projectList)
+    
 }
 export {createProject, projectList, printForm, saveToLocalStorage}

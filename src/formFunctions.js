@@ -135,6 +135,36 @@ if (realtask.important) {
 }
 
 
+function checkButtonClick(checkBoxDiv) {
+    let  index = findSelectedProject()
+   let project = projectList[index].todos
+  // Finds Id of closest List item and with that the index to change important to true or false
+   let closestListItem = checkBoxDiv.closest('li');
+   let idValue = closestListItem.getAttribute('id')
+  
+   // For loop to look for real Id in case one task gets deleted its important
+   let realIdValue;
+   let realtask
+   
+  for (let task of project) {
+    
+   if (task.id == idValue) {
+     realtask = task
+     realIdValue = task.id
+  
+  
+   }
+  }
+  realtask.completed = !realtask.completed
+
+   saveToLocalStorage()
+  
+  
+  
+  
+  }
+
+
 function deleteButtonClicked(deleteButton) {
     let  index = findSelectedProject(deleteButton)
   
@@ -190,4 +220,4 @@ function moveTaskEditForm() {
     }
   }
   
-export {projectButtonClicked, formPopUp, cancelProject, cancelTask, importantButtonClick,deleteButtonClicked, showHiddenForm, editCancelTask,moveTaskEditForm}
+export {projectButtonClicked, formPopUp, cancelProject, cancelTask, importantButtonClick,deleteButtonClicked, showHiddenForm, editCancelTask,moveTaskEditForm,checkButtonClick}

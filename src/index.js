@@ -25,6 +25,10 @@ printForm();
       <div class="content">
         <div class="left-panel">
           <h1>Home</h1>
+          <div class="project-item" id="allTasks">All Tasks</div>
+          <div class="project-item"id="importantTasks">Important</div>
+          <div class="project-item"id="todayTasks">Today</div>
+          <div class="project-item"id="nextSevenDaysTasks">Next 7 Days</div>
           <div class="Projects">
             <h1>Projects</h1>
             <form id="editForm" class="hidden">

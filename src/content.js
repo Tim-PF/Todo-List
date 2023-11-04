@@ -1,12 +1,16 @@
-import { formPopUp, cancelTask , importantButtonClick, deleteButtonClicked, showHiddenForm, editCancelTask,moveTaskEditForm } from "./formFunctions";
+import { formPopUp, cancelTask , importantButtonClick, deleteButtonClicked, showHiddenForm, editCancelTask,moveTaskEditForm,checkButtonClick } from "./formFunctions";
 import { submitFormTask } from "./createTasks";
 import { projectList, saveToLocalStorage } from "./createProject";
 import { findSelectedProject, editFormTask } from "./createTasks";
 import { id } from "./createTasks";
+import {allTasks, tasksImportant, tasksToday, tasksNextSevenDays} from "./home";
 
 //Important for editing Tasks !
 export let hiddenIdValue = null;
 export function loadContent(name) {
+
+
+
 
 // Right Panel DIV
  
@@ -208,6 +212,7 @@ export function pushTasksToContent() {
        checkBoxDiv.classList.add('unchecked')
        checkBoxDiv.addEventListener('click', () => {
         checkBoxDiv.classList.toggle('checked')
+        checkButtonClick(checkBoxDiv)
        })
 
     // Div with Title and Description 
@@ -283,7 +288,7 @@ export function pushTasksToContent() {
        tasks.appendChild(taskRightSideDiv);
 
       // Functions to check if checked or important 
-      checkImportant(task, importantButton, importantButtonTrue);
+      checkImportant(task, importantButton, importantButtonTrue, checkBoxDiv);
 
        //Append Li to UL
     let   allTodos = document.querySelector('.taskList')
@@ -296,8 +301,8 @@ export function pushTasksToContent() {
 
 // Checks if important and adds class important
 
-function checkImportant(task, importantButton, importantButtonTrue) {
-    console.log(importantButton)
+function checkImportant(task, importantButton, importantButtonTrue, checkBoxDiv) {
+    
  if (task.important) {
     // Add the "important" class
     importantButton.classList.add('hideList');
@@ -307,6 +312,14 @@ function checkImportant(task, importantButton, importantButtonTrue) {
     // Remove the "important" class
     importantButton.classList.remove('hideList');
     importantButtonTrue.classList.add('hideList'); 
+}
+
+if (task.completed) {
+    checkBoxDiv.classList.add('checked');
+}
+
+else {
+    checkBoxDiv.classList.remove('checked')
 }
 }
 
