@@ -192,7 +192,7 @@ function deleteButtonClicked(deleteButton, currentProjectId) {
 
    if (taskToRemove) {
        // Remove the task from the project array
-       console.log(taskToRemove)
+       
        project = project.filter(item => item !== taskToRemove);
        projectList[index].todos = project
        // Save the updated project array to local storage

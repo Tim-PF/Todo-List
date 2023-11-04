@@ -12,6 +12,10 @@ function chooseProject() {
     return allTasks()
   }
 
+  else if (selectedProject && selectedProject.id === 'importantTasks')  {
+    return tasksImportant()
+  }
+
   else {
     return null
   }
@@ -21,7 +25,6 @@ function allTasks() {
     clearContent()
     
     let homeArray = []
-    console.log(homeArray)
     projectList.forEach((project) =>{
         project.todos.forEach((task) => {
           homeArray.push(task)
@@ -32,21 +35,35 @@ function allTasks() {
 }
 
 function tasksImportant() {
-    console.log("imp")
+    clearContent()
+    let importantArray = []
+    projectList.forEach((project) =>{
+        project.todos.forEach((task) => {
+            if(task.important){
+                importantArray.push(task)
+            }
+            else{
+                return;
+            }
+        });
+    });
+
+ return importantArray
+    
 }
 
 function tasksToday() {
-    console.log("tod")
+    
 }
 
 function tasksNextSevenDays() {
-    console.log("7")
+   
 }
 
 
 
 function clearContent() {
-    console.log("Test Test")
+   
         const ul = document.querySelector('.taskList');
         if (ul) {
           while (ul.firstChild) {

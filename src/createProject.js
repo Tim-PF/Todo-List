@@ -39,7 +39,9 @@ allTasksButton.addEventListener('click', () => {
     })
 
 const importantButton = document.querySelector('#importantTasks');
-importantButton.addEventListener('click', () => selectProject(importantButton), tasksImportant())
+importantButton.addEventListener('click', () => {
+    selectProject(importantButton)
+    loadContent('Important')})
 
 const todayButton = document.querySelector('#todayTasks')
 todayButton.addEventListener('click', () => selectProject(todayButton), tasksToday())
