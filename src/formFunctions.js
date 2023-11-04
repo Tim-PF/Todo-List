@@ -42,7 +42,7 @@ function formPopUp() {
 }
 
 function showHiddenForm() {
-    console.log("hi clicked")
+    
     const formDiv = document.querySelector('.editTaskDiv')
     formDiv.classList.remove('hidden')
 }
@@ -92,8 +92,8 @@ function editCancelTask() {
 
 // Important Button (star) when clicked
 
-function importantButtonClick(importantButton, importantButtonTrue) {
-  let  index = findSelectedProject(importantButton)
+function importantButtonClick(importantButton, importantButtonTrue, currentProjectId) {
+  let  index = currentProjectId
  let project = projectList[index].todos
 // Finds Id of closest List item and with that the index to change important to true or false
  let closestListItem = importantButton.closest('li');
@@ -135,8 +135,8 @@ if (realtask.important) {
 }
 
 
-function checkButtonClick(checkBoxDiv) {
-    let  index = findSelectedProject()
+function checkButtonClick(checkBoxDiv, currentProjectId) {
+    let  index = currentProjectId
    let project = projectList[index].todos
   // Finds Id of closest List item and with that the index to change important to true or false
    let closestListItem = checkBoxDiv.closest('li');
@@ -165,8 +165,8 @@ function checkButtonClick(checkBoxDiv) {
   }
 
 
-function deleteButtonClicked(deleteButton) {
-    let  index = findSelectedProject(deleteButton)
+function deleteButtonClicked(deleteButton, currentProjectId) {
+    let  index = currentProjectId
   
     let project = projectList[index].todos
     let projectName = projectList[index].name

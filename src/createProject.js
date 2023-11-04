@@ -32,16 +32,21 @@ function printForm() {
 
 // Left Panel DIV Premade Projects (All Tasks, Today, Next7days, Important) adds Event Listener
 const allTasksButton = document.querySelector('#allTasks')
-allTasksButton.addEventListener('click', () => allTasks() )
+
+allTasksButton.addEventListener('click', () => {
+     selectProject(allTasksButton)
+     allTasks()
+     loadContent('all tasks')
+    })
 
 const importantButton = document.querySelector('#importantTasks');
-importantButton.addEventListener('click', () => tasksImportant())
+importantButton.addEventListener('click', () => selectProject(importantButton), tasksImportant())
 
 const todayButton = document.querySelector('#todayTasks')
-todayButton.addEventListener('click', () =>tasksToday() )
+todayButton.addEventListener('click', () => selectProject(todayButton), tasksToday())
 
 const nextSevenDaysButton = document.querySelector('#nextSevenDaysTasks')
-nextSevenDaysButton.addEventListener('click', () => tasksNextSevenDays() )
+nextSevenDaysButton.addEventListener('click', () => selectProject(nextSevenDaysButton), tasksNextSevenDays())
 
 
    

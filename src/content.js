@@ -7,8 +7,21 @@ import {allTasks, tasksImportant, tasksToday, tasksNextSevenDays} from "./home";
 
 //Important for editing Tasks !
 export let hiddenIdValue = null;
+export let hiddenProjectId = null;
 export function loadContent(name) {
 
+// Left Panel DIV Premade Projects (All Tasks, Today, Next7days, Important) adds Event Listener
+const allTasksButton = document.querySelector('#allTasks')
+allTasksButton.addEventListener('click', () => allTasks() )
+
+const importantButton = document.querySelector('#importantTasks');
+importantButton.addEventListener('click', () => tasksImportant())
+
+const todayButton = document.querySelector('#todayTasks')
+todayButton.addEventListener('click', () => tasksToday() )
+
+const nextSevenDaysButton = document.querySelector('#nextSevenDaysTasks')
+nextSevenDaysButton.addEventListener('click', () => tasksNextSevenDays() )
 
 
 
@@ -66,7 +79,10 @@ editTaskDiv.classList.add('hidden');
 // Create the form element
 const editTaskForm = document.createElement('form');
 editTaskForm.id = 'editTaskForm'
-editTaskDiv.addEventListener('submit', editFormTask)    // Changes needed !!!
+editTaskDiv.addEventListener('submit', (event) => {
+    console.log(hiddenProjectId)
+    editFormTask(event, hiddenProjectId)});
+   // Changes needed !!!
 
 // Create a label and input for the title
 const editTitleLabel = document.createElement('label');
@@ -128,7 +144,11 @@ formDiv.classList.add('hidden');
 // Create the form element
 const form = document.createElement('form');
 form.id = 'taskForm'
-form.addEventListener('submit', submitFormTask)
+form.addEventListener('submit', (event) => {
+    submitFormTask(event);
+  });
+  
+
 
 // Create a label and input for the title
 const titleLabel = document.createElement('label');
@@ -199,10 +219,15 @@ pushTasksToContent(name)
 // Basic Function to print todos in a list inside content
 export function pushTasksToContent() {
 
-   const index = findSelectedProject()
+  let index = findSelectedProject()
+   if(index == null) {
+    index = hiddenProjectId
+   }
    const currentProjectArray = projectList[index].todos;
     for ( let task of currentProjectArray) {
 
+        let currentProjectId = task.projectId
+    
         //li
     let   tasks = document.createElement('li')
     tasks.id = task.id
@@ -212,7 +237,7 @@ export function pushTasksToContent() {
        checkBoxDiv.classList.add('unchecked')
        checkBoxDiv.addEventListener('click', () => {
         checkBoxDiv.classList.toggle('checked')
-        checkButtonClick(checkBoxDiv)
+        checkButtonClick(checkBoxDiv, currentProjectId)
        })
 
     // Div with Title and Description 
@@ -243,7 +268,7 @@ export function pushTasksToContent() {
        importantButton.classList.add('material-icons-round', 'star-outline')
        importantButton.textContent = "star_outline"
        importantButton.addEventListener('click', () => {
-        importantButtonClick(importantButton , importantButtonTrue);
+        importantButtonClick(importantButton , importantButtonTrue, currentProjectId);
        })
 
        // Second Important Button Full Star if important
@@ -251,7 +276,7 @@ export function pushTasksToContent() {
        importantButtonTrue.classList.add('material-icons-round', 'important','hideList')
        importantButtonTrue.textContent = "star"
        importantButtonTrue.addEventListener('click', () => {
-        importantButtonClick(importantButton , importantButtonTrue);
+        importantButtonClick(importantButton , importantButtonTrue, currentProjectId);
        })
 
        // Edit Button
@@ -264,6 +289,7 @@ export function pushTasksToContent() {
         // Now you can use the idValue variable here or pass it to other functions
         showHiddenForm();
         moveTaskEditForm()
+        hiddenProjectId = currentProjectId
     });
 
       // Delete Button
@@ -271,7 +297,7 @@ export function pushTasksToContent() {
       deleteButton.classList.add('material-icons-round')
       deleteButton.textContent = "delete_outline"
       deleteButton.addEventListener('click',() => {
-        deleteButtonClicked(deleteButton)
+        deleteButtonClicked(deleteButton, currentProjectId)
       })
        //Append Button to Right Side Div 
 
@@ -328,7 +354,7 @@ function hiddenId(editButton) {
     if (closestListItem) {
         // Get the value of the 'data-some-attribute' attribute from the closest <li> element
         const idValue = closestListItem.getAttribute('id');
-        console.log(idValue)
+        
         return idValue
 }
 }

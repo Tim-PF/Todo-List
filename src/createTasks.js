@@ -3,7 +3,8 @@ import { loadContent } from "./content";
 import { saveToLocalStorage } from "./createProject";
 import { hiddenIdValue } from "./content";
 class Tasks {
-    constructor(id,title,description,date) {
+    constructor(projectId,id,title,description,date) {
+        this.projectId = projectId
         this.id = id;
         this.title = title;
         this.description = description;
@@ -21,23 +22,27 @@ function submitFormTask(event) {
    const titleTask = document.querySelector('#taskInput');
    const optionalDescription = document.querySelector('#taskOptionalInput');
    const taskDate = document.querySelector('#taskDate');
+   
 
+   
+
+   const projectId = findSelectedProject()
    const title = titleTask.value;
    const description = optionalDescription.value;
    const date = taskDate.value;
 
+ 
    
-   
-   createNewTask(defaultId,title,description,date);
+   createNewTask(projectId,defaultId,title,description,date);
    
    form.reset();
 
    reloadContent();
 }
 
-function editFormTask(event) {
+function editFormTask(event, hiddenProjectId) {
     event.preventDefault();
-    
+    console.log(hiddenProjectId)
     const form = document.querySelector('#editTaskForm')
     const titleTask = document.querySelector('#editTaskInput');
     const optionalDescription = document.querySelector('#editTaskOptionalInput');
@@ -49,11 +54,11 @@ function editFormTask(event) {
  
     
     
-   editTask(defaultId,title,description,date);
+   editTask(hiddenProjectId,defaultId,title,description,date);
     
     form.reset();
  
-    reloadContent();
+    reloadContent(hiddenProjectId);
  }
 
 // defaultID for now ! Add more after localStorage
@@ -62,10 +67,10 @@ let defaultId = 0
 let id = Number(localStorage.getItem("currentId")) || defaultId;
 
 // Finds index of Selected Project and saves the created Task inside of the todos Array of called Project
-function createNewTask(defaultId,title,description,date) {
+function createNewTask(hiddenProjectId,defaultId,title,description,date) {
  let newId = id;
- const task = new Tasks(newId, title, description, date);
- let index = findSelectedProject();
+ const task = new Tasks(hiddenProjectId,newId, title, description, date);
+ let index = findSelectedProject()
  projectList[index].todos.push(task)
 
  
@@ -79,6 +84,9 @@ function findSelectedProject() {
     if (selectedProject === null) {
         return
     }
+    if (selectedProject.id == "allTasks") {
+        
+    }
     else {
      return selectedProject.getAttribute('data-project')
     }
@@ -86,16 +94,25 @@ function findSelectedProject() {
 }
 
 // Finds Project index in ProjectList and than laods name into loadContent
-function reloadContent() {
-    const project = findSelectedProject();
+function reloadContent(hiddenProjectId) {
+    let project = null;
+    if (hiddenProjectId == null) {
+        project = findSelectedProject()
+    }
+    else {
+        project = hiddenProjectId
+
+    }
+    
+    
     loadContent(projectList[project].name)
 
 }
 
 
 
-function editTask(defaultId,title,description,date) {
-    let  index = findSelectedProject()
+function editTask(hiddenProjectId,defaultId,title,description,date) {
+    let  index = hiddenProjectId
     let project = projectList[index].todos
    // Finds Id of closest List item and with that the index to change important to true or false
    
