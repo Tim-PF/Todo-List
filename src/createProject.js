@@ -35,7 +35,6 @@ const allTasksButton = document.querySelector('#allTasks')
 
 allTasksButton.addEventListener('click', () => {
      selectProject(allTasksButton)
-     allTasks()
      loadContent('all tasks')
     })
 
@@ -255,4 +254,4 @@ function saveToLocalStorage(){
 
     
 }
-export {createProject, projectList, printForm, saveToLocalStorage}
+export {createProject, projectList, printForm, saveToLocalStorage,defaultProjectList}

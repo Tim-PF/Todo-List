@@ -3,25 +3,12 @@ import { submitFormTask } from "./createTasks";
 import { projectList, saveToLocalStorage } from "./createProject";
 import { findSelectedProject, editFormTask } from "./createTasks";
 import { id } from "./createTasks";
-import {allTasks, tasksImportant, tasksToday, tasksNextSevenDays} from "./home";
+import {allTasks, tasksImportant, tasksToday, tasksNextSevenDays, chooseProject} from "./home";
 
 //Important for editing Tasks !
 export let hiddenIdValue = null;
 export let hiddenProjectId = null;
 export function loadContent(name) {
-
-// Left Panel DIV Premade Projects (All Tasks, Today, Next7days, Important) adds Event Listener
-const allTasksButton = document.querySelector('#allTasks')
-allTasksButton.addEventListener('click', () => allTasks() )
-
-const importantButton = document.querySelector('#importantTasks');
-importantButton.addEventListener('click', () => tasksImportant())
-
-const todayButton = document.querySelector('#todayTasks')
-todayButton.addEventListener('click', () => tasksToday() )
-
-const nextSevenDaysButton = document.querySelector('#nextSevenDaysTasks')
-nextSevenDaysButton.addEventListener('click', () => tasksNextSevenDays() )
 
 
 
@@ -223,9 +210,16 @@ export function pushTasksToContent() {
    if(index == null) {
     index = hiddenProjectId
    }
-   const currentProjectArray = projectList[index].todos;
-    for ( let task of currentProjectArray) {
+ let currentProjectArray = chooseProject()
 
+   if (currentProjectArray == null) {
+    console.log("hihi")
+    currentProjectArray = projectList[index].todos;
+   }
+
+
+    for ( let task of currentProjectArray) {
+// Saves the projectId from the Task Object     Important!
         let currentProjectId = task.projectId
     
         //li

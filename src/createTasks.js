@@ -86,6 +86,7 @@ function findSelectedProject() {
     }
     if (selectedProject.id == "allTasks") {
         
+        
     }
     else {
      return selectedProject.getAttribute('data-project')
