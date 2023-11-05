@@ -1,7 +1,9 @@
 import { projectList } from "./createProject";
 import { loadContent, hiddenProjectId } from "./content";
 import { findSelectedProject } from "./createTasks";
-
+import isToday from 'date-fns/isToday'
+import parseISO from "date-fns/parseISO";
+import isThisWeek from 'date-fns/isThisWeek'
 
 
 
@@ -14,6 +16,16 @@ function chooseProject() {
 
   else if (selectedProject && selectedProject.id === 'importantTasks')  {
     return tasksImportant()
+  }
+
+  else if (selectedProject && selectedProject.id === 'todayTasks')  {
+    
+    return tasksToday()
+  }
+
+  else if (selectedProject && selectedProject.id === 'nextSevenDaysTasks')  {
+    
+    return tasksNextSevenDays()
   }
 
   else {
@@ -53,10 +65,38 @@ function tasksImportant() {
 }
 
 function tasksToday() {
-    
+    clearContent()
+    let todayArray = []
+    projectList.forEach((project) => {
+        project.todos.forEach((task) => {
+            console.log(task.date)
+         if (isToday(parseISO(task.date))) {
+            todayArray.push(task)
+         }
+         else {
+            return;
+         }
+        });
+    });
+    return todayArray
 }
 
 function tasksNextSevenDays() {
+    clearContent()
+    let thisWeekArray = []
+    projectList.forEach((project) => {
+        project.todos.forEach((task) => {
+            console.log(task.date)
+         if (isThisWeek(parseISO(task.date))) {
+            thisWeekArray.push(task)
+         }
+         else {
+            return;
+         }
+        });
+    });
+    return thisWeekArray
+
    
 }
 

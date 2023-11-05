@@ -44,10 +44,16 @@ importantButton.addEventListener('click', () => {
     loadContent('Important')})
 
 const todayButton = document.querySelector('#todayTasks')
-todayButton.addEventListener('click', () => selectProject(todayButton), tasksToday())
+todayButton.addEventListener('click', () => {
+    selectProject(todayButton)
+    loadContent('Today')
+})
 
 const nextSevenDaysButton = document.querySelector('#nextSevenDaysTasks')
-nextSevenDaysButton.addEventListener('click', () => selectProject(nextSevenDaysButton), tasksNextSevenDays())
+nextSevenDaysButton.addEventListener('click', () => {
+    selectProject(nextSevenDaysButton)
+    loadContent('This Week')
+})
 
 
    
