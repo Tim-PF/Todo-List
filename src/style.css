@@ -1,8 +1,8 @@
 :root.light{
-    --color-bg-1:rgb(104, 28, 0);
-    --color-bg-2:rgb(250, 219, 172);
+    --color-bg-1: rgb(218,76,62);
+    --color-bg-2:rgb(252,238,235);
     --color-bg-3:rgb(255, 255, 255);
-    --color-bg-4:rgb(116, 55, 34);
+    --color-bg-4:rgb(218,76,62);
 
 }
 
@@ -19,6 +19,9 @@
 body {
     height: 100vH;
     margin:0;
+    font-family: 'Lato', sans-serif;
+    overflow: hidden;
+    
 }
 #main {
     display:flex;
@@ -28,9 +31,41 @@ body {
 .navbar {
  display:flex;
  justify-content: space-between;
+ align-items: center;
  background-color: var(--color-bg-1);
  height: 60px;
  width: 100%;
+ 
+}
+
+.home-projects {
+    display:flex;
+    cursor: pointer;
+}
+.home-projects img {
+    height:30px;
+    margin-right: 10px;
+}
+
+#sidebar-button {
+    background-color: transparent;
+    border: none;
+   
+    
+}
+
+#addProject {
+    display:flex;
+    background-color: transparent;
+    align-items:center;
+    font-size: 25px;
+    color: var(--color-bg-1);
+    border:none;
+}
+
+#sidebar-button span {
+  font-size: 40px;
+  color:white;
 }
 .content {
     background-color: var(--color-bg-3);
@@ -54,6 +89,7 @@ width: 100%;
     background-color: var(--color-bg-2);
     width:350px;
     transition: transform 1s;
+    padding-left: 10px;
 }
 
 .left-panel.hidden {
@@ -70,7 +106,135 @@ width: 100%;
 
 #projectForm {
     display:flex;
+
 }
+
+#fname {
+    height:30px;
+    border-radius:5px ;
+    border: 1px solid black;
+    background-color:rgb(255, 255, 255);
+    opacity: 100%;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.projectSubmitButton {
+    font-size: 15px;
+    font-weight: 500;
+    color: white;
+    background-color: green;
+    border:none;
+    border-radius: 4px;
+    width: 60px;
+}
+
+.projectCancelButton {
+    font-size: 15px;
+    font-weight: 500;
+    color: white;
+    background-color: rgb(211, 3, 3);
+    border:none;
+    border-radius: 4px;
+    width: 60px;
+    margin-left: 5px;
+}
+
+
+.titleDiv{
+   
+    background-color: var(--color-bg-2);
+    height: 60px;
+    padding: 20px;
+    font-size:2.3rem;
+    color: #050505;
+    border-radius: 3px;
+    margin: 10px 20px;
+    font-weight: 800;
+    
+}
+
+#editTaskForm input {
+    height:30px;
+    border-radius:5px ;
+    border: 1px solid black;
+    background-color:rgb(255, 255, 255);
+    opacity: 100%;
+    cursor: pointer;
+    margin-right: 10px;
+    margin-bottom: 5px;
+}
+
+#editTaskForm  {
+    font-size: 20px;
+}
+
+.editSubmitButton {
+    font-size: 15px;
+    font-weight: 500;
+    color: white;
+    background-color: green;
+    border:none;
+    border-radius: 4px;
+    width: 80px;
+    height:30px;
+}
+
+.editCancelButton {
+    font-size: 15px;
+    font-weight: 500;
+    color: white;
+    background-color: rgb(211, 3, 3);
+    border:none;
+    border-radius: 4px;
+    width: 80px;
+    margin-left: 5px;
+    height:30px;
+}
+
+#taskForm {
+    font-size: 20px;
+    margin-left: 20px;
+}
+
+#taskForm input {
+    height:30px;
+    border-radius:5px ;
+    border: 1px solid black;
+    background-color:rgb(255, 255, 255);
+    opacity: 100%;
+    cursor: pointer;
+    margin-right: 10px;
+    margin-bottom: 5px;
+}
+.projectIcon span {
+    font-size: 25px;
+    margin-right: 10px;
+}
+
+#taskForm button {
+    font-size: 15px;
+    font-weight: 500;
+    color: white;
+    background-color: green;
+    border:none;
+    border-radius: 4px;
+    width: 80px;
+    height:30px;
+
+}
+#taskForm :last-child {
+    font-size: 15px;
+    font-weight: 500;
+    color: white;
+    background-color: rgb(211, 3, 3);
+    border:none;
+    border-radius: 4px;
+    width: 80px;
+    margin-left: 5px;
+    height:30px;
+}
+
 #projectForm.hidden {
     top: 0;
     left: 0;
@@ -95,9 +259,51 @@ width: 100%;
 }
 
 .project-item {
-
+display:flex;
+flex:1;
+align-items: center;
+font-size: 25px;
+font-weight:700;
+margin-bottom: 20px;
 }
 
+.project-item p {
+    margin:0px;
+    margin-bottom: 5px;
+    margin-left: 10px;
+}
+
+.project-item span {
+    font-size: 25px;
+}
+
+.formActionButtons {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    position: relative;
+}
+
+.editDiv {
+    color:var(--color-bg-1);
+    margin-right: 10px;
+    cursor:pointer;
+    
+}
+
+.editDiv span {
+    font-size: 30px;
+}
+
+.deleteDiv {
+    color:var(--color-bg-1);
+    margin-right: 20px;
+    cursor:pointer;
+}
+
+.deleteDiv span {
+    font-size: 30px;
+}
 .project-item.hidden {
     top: 0;
     left: 0;
@@ -137,29 +343,64 @@ width: 100%;
 
 ul {
     padding: 0px;
-    margin: 0px;
-
+    margin: 0px 20px;
+    
    
 }
 
 li {
     list-style: none;
     display:flex;
+    align-items: center;
     border: 1px solid black;
     padding: 0px;
-    margin: 0px;
+    margin-bottom: 10px;
+    height:50px;
+    border-radius: 5px;
+    font-size: 20px;
+    
+    
     
 
 }
 
+.list-infos {
+    flex:2;
+}
+
+.dateDiv {
+    flex:1;
+}
+
+.taskButtons span {
+    color: var(--color-bg-1);
+    flex:2;
+    font-size: 30px;
+    margin-right: 10px;
+    
+}
+
 #addTask {
-  width:  120px;
+    display:flex;
+    background-color: transparent;
+    align-items:center;
+    font-size: 35px;
+    color: var(--color-bg-1);
+    border:none;
+    
+}
+
+#addTask span {
+    
+    margin-left: 10px;
+    font-size: 35px;
 }
 
 
 .unchecked{
-    width: 20px;
-    height: 20px;
+    margin-left: 10px;
+    width: 30px;
+    height: 30px;
     border: solid 2px black ;
     border-radius: 50%;
     margin-right:8px;
@@ -178,8 +419,8 @@ li {
     flex-shrink: 0;
     border-color: goldenrod;
 }
-.checked {
-background-image: url(./images/checkmark.png);
+.unchecked.checked {
+background-image:url(./images/checkmark.png);
 background-size:100%;
 background-repeat:no-repeat;
 background-origin:border-box;
@@ -198,9 +439,10 @@ border-color: #2abd67;
 /* hideList makes star invisible */
 .hideList {
     opacity: 0;
-    top: 10px; 
-    left: 10px;
+    top: 0px; 
+    left: 0px;
     position: absolute;
+    pointer-events: none;
 }
 
 
@@ -213,3 +455,70 @@ border-color: #2abd67;
     transition: max-height 1s ease-out ;
     opacity: 0;
 }
+
+.logo-area {
+    display:flex;
+    align-items:center;
+    
+}
+.logo-area img {
+    height: 55px;
+    padding:5px;
+    
+}
+
+
+.theme{
+    margin-right:10px;
+    user-select: none;
+}
+.label{
+    background-color: #fefcfe;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding:10px;
+    border-radius: 50px;
+    height:40px;
+    width: 80px;
+    box-sizing: border-box;
+    position: relative;
+    transform:scale(0.8);
+    transition: background-color 0.2s ease-in;
+    border: solid 3px #2abd67;
+    cursor: pointer;
+}
+.checkbox{
+    opacity: 0;
+    position: absolute;
+}
+.sun{
+    transform: scale(1.3);
+    width:24.7px;
+}
+.moon{
+    color:rgb(86, 152, 163);
+    transform: scale(1.3);
+}
+.ball{
+    position: absolute;
+    width:25px;
+    height:25px;
+    left: 3px;
+    background-color: #2abd67;
+    border:solid 4px #fefcfe;
+    border-radius: 50%;
+    transition: transform 0.2s linear;
+}
+
+/* plus meaning target the node after it */
+.checkbox:checked + .label .ball{
+    transform: translate(37px);
+    background-color: #2abd67;
+    border:solid 4px #f2f3f5;
+}
+.checkbox:checked + label{
+    background-color: #f2f3f5;
+}
+
+

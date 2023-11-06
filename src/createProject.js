@@ -35,7 +35,7 @@ const allTasksButton = document.querySelector('#allTasks')
 
 allTasksButton.addEventListener('click', () => {
      selectProject(allTasksButton)
-     loadContent('all tasks')
+     loadContent('All tasks')
     })
 
 const importantButton = document.querySelector('#importantTasks');
@@ -70,17 +70,25 @@ nextSevenDaysButton.addEventListener('click', () => {
 
        
        
-       projectDiv.textContent = project.name;
-       let projectName = projectDiv.textContent
+       
+       let projectName = project.name
        projectDiv.classList.add('project-item')
        projectDiv.setAttribute('data-project', projectData);
-
        
 
        projectDiv.addEventListener('click', () => {selectProject(projectDiv),
         loadContent(projectName)
        })
        
+       let newspan = document.createElement('span')
+       newspan.classList.add('material-icons-round')
+       newspan.textContent = 'menu'
+       projectDiv.appendChild(newspan)
+
+       let projectText = document.createElement('p')
+       projectText.textContent = project.name
+       projectDiv.appendChild(projectText)
+
         
        // Edit And Delete Div
        const buttonDiv= document.createElement('div')

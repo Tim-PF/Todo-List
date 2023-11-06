@@ -18,17 +18,40 @@ printForm();
     const home = document.querySelector('#main');
     home.innerHTML = `
       <div class="navbar">
-        <button id="sidebar-button">SideBar</button>
-        <h1>TU<span style="color: red;">DU<span></h1>
-        <button id="theme-button">Toggle MODE</button>      
-        </div>      
+          
+          <button id="sidebar-button"><span class="material-icons-round">menu</span></button>
+          <div class="logo-area">
+            <img src="./images/coffeeCup.svg">
+            <h1>TO<span style="color: white;">DO<span></h1>
+          </div>
+          <div class="theme">
+            <input type="checkbox" class="checkbox" id="checkbox" checked="true">
+            <label for="checkbox" class="label">
+                <img class="sun" src="images/sun.png">
+                <span class="material-icons-round moon">dark_mode</span>
+                <div class="ball"></div>
+            </label>
+        </div>     
+      </div>      
       <div class="content">
         <div class="left-panel">
           <h1>Home</h1>
+          <div class="home-projects">
+          <img src="./images/all.png" alt="All">
           <div class="project-item" id="allTasks">All Tasks</div>
+        </div>
+        <div class="home-projects">
+          <img src="./images/star.png" alt="Important">
           <div class="project-item"id="importantTasks">Important</div>
+        </div>
+        <div class="home-projects">
+          <img src="./images/today.png" alt="Today">
           <div class="project-item"id="todayTasks">Today</div>
-          <div class="project-item"id="nextSevenDaysTasks">Next 7 Days</div>
+        </div>
+        <div class="home-projects">
+          <img src="./images/week.png" alt="This Week">
+          <div class="project-item"id="nextSevenDaysTasks">This Week</div>
+        </div>
           <div class="Projects">
             <h1>Projects</h1>
             <form id="editForm" class="hidden">

@@ -4,11 +4,18 @@ import { projectList, saveToLocalStorage } from "./createProject";
 import { findSelectedProject, editFormTask } from "./createTasks";
 import { id } from "./createTasks";
 import {allTasks, tasksImportant, tasksToday, tasksNextSevenDays, chooseProject} from "./home";
+import Icon from './images/coffeeCup.svg';
 
 //Important for editing Tasks !
 export let hiddenIdValue = null;
 export let hiddenProjectId = null;
 export function loadContent(name) {
+
+
+// NavBar
+
+const myIcon = new Image();
+myIcon.src = Icon;
 
 
 
@@ -25,6 +32,7 @@ export function loadContent(name) {
 const titleDiv = document.createElement ('div');
 const titleBox = document.createElement('div');
 titleBox.textContent = name;
+titleBox.classList.add('titleDiv')
 titleDiv.appendChild(titleBox)
 contentPanel.appendChild(titleDiv)
 
@@ -44,6 +52,19 @@ button.id = 'addTask';
 button.addEventListener('click', () => {
  formPopUp();
 })
+
+let  selectedProject = document.querySelector('.selected')
+
+if (
+  selectedProject &&
+  (selectedProject.id === 'allTasks' ||
+   selectedProject.id === 'importantTasks' ||
+   selectedProject.id === 'todayTasks' ||
+   selectedProject.id === 'nextSevenDaysTasks')
+) {
+  button.classList.add('hidden')
+}
+
 
 // Create the span element for the icon
 const span = document.createElement('span');
@@ -100,10 +121,12 @@ editDateInput.setAttribute('name', 'date');
 // Create a submit button
 const editSubmitButton = document.createElement('button');
 editSubmitButton .setAttribute('type', 'submit');
+editSubmitButton.classList.add('editSubmitButton')
 editSubmitButton .textContent = 'Submit';
 
 const editCancelButton = document.createElement('button');
 editCancelButton.setAttribute('type', 'button');
+editCancelButton.classList.add('editCancelButton')
 editCancelButton.textContent = 'Cancel';
 editCancelButton.addEventListener('click', () => {
     editCancelTask()
@@ -235,7 +258,8 @@ export function pushTasksToContent() {
        })
 
     // Div with Title and Description 
-    let listInfos = document.createElement('div')
+     let listInfos = document.createElement('div')
+     listInfos.classList.add('list-infos')
 
 
        //Task Title Div
@@ -253,9 +277,11 @@ export function pushTasksToContent() {
        // Date Div
        let dateDiv = document.createElement('div');
        dateDiv.textContent = task.date;
+       dateDiv.classList.add('dateDiv')
 
        // Right Side Div for Buttons Important Edit and Delete Button
        let taskRightSideDiv = document.createElement('div')
+       taskRightSideDiv.classList.add('taskButtons')
 
        // Important Button
        let importantButton = document.createElement('span')
