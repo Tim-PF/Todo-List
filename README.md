@@ -1,5 +1,6 @@
 # ToDo List: Never Forget Important Tasks
 Stay organized, beat procrastination, and take control of your daily responsibilities with the "Never Forget" ToDo List. This feature-packed application helps you stay on top of your tasks and prioritize what's essential.
+Check out live preview here: https://tim-pf.github.io/Todo-List/dist/index.html
 
 # Key Features:
 * Project Management: Create, rename, and delete projects to structure your tasks efficiently.
