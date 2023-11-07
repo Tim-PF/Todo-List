@@ -35,7 +35,7 @@ const allTasksButton = document.querySelector('#allTasks')
 
 allTasksButton.addEventListener('click', () => {
      selectProject(allTasksButton)
-     loadContent('All tasks')
+     loadContent('All Tasks')
     })
 
 const importantButton = document.querySelector('#importantTasks');

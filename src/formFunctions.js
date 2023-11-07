@@ -169,7 +169,21 @@ function deleteButtonClicked(deleteButton, currentProjectId) {
     let  index = currentProjectId
   
     let project = projectList[index].todos
+
     let projectName = projectList[index].name
+    let  selectedProject = document.querySelector('.selected')
+
+if (
+  selectedProject &&
+  (selectedProject.id === 'allTasks' ||
+   selectedProject.id === 'importantTasks' ||
+   selectedProject.id === 'todayTasks' ||
+   selectedProject.id === 'nextSevenDaysTasks')
+) {
+   projectName = selectedProject.textContent
+}
+
+   
    // Finds Id of closest List item and with that the index to change important to true or false
     let closestListItem = deleteButton.closest('li');
     let idValue = closestListItem.getAttribute('id')

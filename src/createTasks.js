@@ -42,7 +42,7 @@ function submitFormTask(event) {
 
 function editFormTask(event, hiddenProjectId) {
     event.preventDefault();
-    console.log(hiddenProjectId)
+    
     const form = document.querySelector('#editTaskForm')
     const titleTask = document.querySelector('#editTaskInput');
     const optionalDescription = document.querySelector('#editTaskOptionalInput');
@@ -96,17 +96,33 @@ function findSelectedProject() {
 
 // Finds Project index in ProjectList and than laods name into loadContent
 function reloadContent(hiddenProjectId) {
+  
     let project = null;
+    let projectName = project;
     if (hiddenProjectId == null) {
         project = findSelectedProject()
     }
     else {
         project = hiddenProjectId
+        projectName = projectList[project].name
 
     }
     
+    let  selectedProject = document.querySelector('.selected')
+
+    if (
+      selectedProject &&
+      (selectedProject.id === 'allTasks' ||
+       selectedProject.id === 'importantTasks' ||
+       selectedProject.id === 'todayTasks' ||
+       selectedProject.id === 'nextSevenDaysTasks')
+    ) {
+       projectName = selectedProject.textContent
+    }
     
-    loadContent(projectList[project].name)
+    console.log(projectName)
+    
+    loadContent(projectName)
 
 }
 
