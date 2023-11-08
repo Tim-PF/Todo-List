@@ -1,116 +1,103 @@
+import isToday from "date-fns/isToday";
+import parseISO from "date-fns/parseISO";
+import isThisWeek from "date-fns/isThisWeek";
 import { projectList } from "./createProject";
 import { loadContent, hiddenProjectId } from "./content";
 import { findSelectedProject } from "./createTasks";
-import isToday from 'date-fns/isToday'
-import parseISO from "date-fns/parseISO";
-import isThisWeek from 'date-fns/isThisWeek'
-
-
 
 function chooseProject() {
-  let  selectedProject = document.querySelector('.selected')
+  const selectedProject = document.querySelector(".selected");
 
-  if (selectedProject && selectedProject.id === 'allTasks')  {
-    return allTasks()
+  if (selectedProject && selectedProject.id === "allTasks") {
+    return allTasks();
   }
 
-  else if (selectedProject && selectedProject.id === 'importantTasks')  {
-    return tasksImportant()
+  if (selectedProject && selectedProject.id === "importantTasks") {
+    return tasksImportant();
   }
 
-  else if (selectedProject && selectedProject.id === 'todayTasks')  {
-    
-    return tasksToday()
+  if (selectedProject && selectedProject.id === "todayTasks") {
+    return tasksToday();
   }
 
-  else if (selectedProject && selectedProject.id === 'nextSevenDaysTasks')  {
-    
-    return tasksNextSevenDays()
+  if (selectedProject && selectedProject.id === "nextSevenDaysTasks") {
+    return tasksNextSevenDays();
   }
 
-  else {
-    return null
-  }
+  return null;
 }
 
 function allTasks() {
-    clearContent()
-    
-    let homeArray = []
-    projectList.forEach((project) =>{
-        project.todos.forEach((task) => {
-          homeArray.push(task)
-        });
-    });
+  clearContent();
 
-    return homeArray
+  const homeArray = [];
+  projectList.forEach((project) => {
+    project.todos.forEach((task) => {
+      homeArray.push(task);
+    });
+  });
+
+  return homeArray;
 }
 
 function tasksImportant() {
-    clearContent()
-    let importantArray = []
-    projectList.forEach((project) =>{
-        project.todos.forEach((task) => {
-            if(task.important){
-                importantArray.push(task)
-            }
-            else{
-                return;
-            }
-        });
+  clearContent();
+  const importantArray = [];
+  projectList.forEach((project) => {
+    project.todos.forEach((task) => {
+      if (task.important) {
+        importantArray.push(task);
+      } else {
+      }
     });
+  });
 
- return importantArray
-    
+  return importantArray;
 }
 
 function tasksToday() {
-    clearContent()
-    let todayArray = []
-    projectList.forEach((project) => {
-        project.todos.forEach((task) => {
-            console.log(task.date)
-         if (isToday(parseISO(task.date))) {
-            todayArray.push(task)
-         }
-         else {
-            return;
-         }
-        });
+  clearContent();
+  const todayArray = [];
+  projectList.forEach((project) => {
+    project.todos.forEach((task) => {
+      console.log(task.date);
+      if (isToday(parseISO(task.date))) {
+        todayArray.push(task);
+      } else {
+      }
     });
-    return todayArray
+  });
+  return todayArray;
 }
 
 function tasksNextSevenDays() {
-    clearContent()
-    let thisWeekArray = []
-    projectList.forEach((project) => {
-        project.todos.forEach((task) => {
-            console.log(task.date)
-         if (isThisWeek(parseISO(task.date))) {
-            thisWeekArray.push(task)
-         }
-         else {
-            return;
-         }
-        });
+  clearContent();
+  const thisWeekArray = [];
+  projectList.forEach((project) => {
+    project.todos.forEach((task) => {
+      console.log(task.date);
+      if (isThisWeek(parseISO(task.date))) {
+        thisWeekArray.push(task);
+      } else {
+      }
     });
-    return thisWeekArray
-
-   
+  });
+  return thisWeekArray;
 }
-
-
 
 function clearContent() {
-   
-        const ul = document.querySelector('.taskList');
-        if (ul) {
-          while (ul.firstChild) {
-            ul.removeChild(ul.firstChild);
-          }
-        }
-      
+  const ul = document.querySelector(".taskList");
+  if (ul) {
+    while (ul.firstChild) {
+      ul.removeChild(ul.firstChild);
+    }
+  }
 }
 
-export {allTasks, tasksImportant, tasksToday, tasksNextSevenDays, chooseProject}
+export {
+  allTasks,
+  tasksImportant,
+  tasksToday,
+  tasksNextSevenDays,
+  chooseProject,
+};

@@ -1,11 +1,9 @@
-import './style.css';
-import _ from 'lodash';
-import {toggleSideBar} from './sidebar';
-import {toggleTheme} from './theme';
-import {projectButtonClicked, cancelProject} from './formFunctions'
-import { printForm } from './createProject';
-
-
+import "./style.css";
+import _ from "lodash";
+import { toggleSideBar } from "./sidebar";
+import { toggleTheme } from "./theme";
+import { projectButtonClicked, cancelProject } from "./formFunctions";
+import { printForm } from "./createProject";
 
 home();
 toggleSideBar();
@@ -13,10 +11,9 @@ toggleTheme();
 projectButtonClicked();
 printForm();
 
-
-  function home() {
-    const home = document.querySelector('#main');
-    home.innerHTML = `
+function home() {
+  const home = document.querySelector("#main");
+  home.innerHTML = `
       <div class="navbar">
           
           <button id="sidebar-button"><span class="material-icons-round">menu</span></button>
@@ -80,9 +77,8 @@ printForm();
 
       <div class="footer"></div>
     `;
-   const  cancelButton = document.querySelector('.projectCancelButton')
-    cancelButton.addEventListener('click', () => {
-        cancelProject();
-    })
-  }
-  
+  const cancelButton = document.querySelector(".projectCancelButton");
+  cancelButton.addEventListener("click", () => {
+    cancelProject();
+  });
+}
